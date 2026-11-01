@@ -32,10 +32,10 @@ export const siteContent = {
   // Only photos that exist are shown; with none, the gallery stays hidden.
   // Tags create the filter buttons (Shows, Portraits).
   gallery: [
-    { src: asset('images/dk-hero.webp'), alt: 'Doggy Kizz portrait', caption: 'Portrait', tag: 'Portraits' },
+    { src: asset('images/dk-hero.webp'), alt: 'Doggy Kizz studio portrait', caption: 'Studio portrait', tag: 'Portraits' },
     { src: asset('images/dk-about.webp'), alt: 'Doggy Kizz portrait', caption: 'Portrait', tag: 'Portraits' },
-    { src: asset('images/dk-portrait-1.webp'), alt: 'Doggy Kizz portrait', caption: 'Portrait', tag: 'Portraits' },
-    { src: asset('images/dk-portrait-2.webp'), alt: 'Doggy Kizz portrait', caption: 'Portrait', tag: 'Portraits' },
+    { src: asset('images/dk-portrait-1.webp'), alt: 'Doggy Kizz with the crew at night', caption: 'With the crew', tag: 'Moments' },
+    { src: asset('images/dk-portrait-2.webp'), alt: 'Doggy Kizz with a friend in the garden', caption: 'Together', tag: 'Moments' },
     { src: asset('images/dk-portrait-3.webp'), alt: 'Doggy Kizz portrait', caption: 'Portrait', tag: 'Portraits' },
     { src: asset('images/dk-show-1.webp'), alt: 'Doggy Kizz performing live', caption: 'Live on stage', tag: 'Shows' },
     { src: asset('images/dk-show-2.webp'), alt: 'Doggy Kizz on stage with the crowd', caption: 'The crowd', tag: 'Shows' },

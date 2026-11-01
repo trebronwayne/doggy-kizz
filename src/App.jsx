@@ -221,6 +221,8 @@ function HomePage() {
         <div className="about-preview-copy"><p className="eyebrow">BEHIND THE MUSIC</p><h2>{content.aboutTitle}</h2><p>{content.biography}</p><Link to="/about" className="text-link">More about Doggy Kizz <ArrowUpRight size={16} /></Link></div>
       </section>
 
+      <Gallery eyebrow="GALLERY" title="Portraits and moments." text="A closer look at Doggy Kizz, in the studio and with the crew." id="gallery" />
+
       <Shows />
       <BookingStrip />
     </>

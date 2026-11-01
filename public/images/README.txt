@@ -1,16 +1,17 @@
 DOGGY KIZZ - PHOTOS
-WebP is preferred, ideally under 150 KB each. A .jpg with the same name also works.
+WebP is preferred, ideally under 250 KB each. A .jpg with the same name also works.
 Until a file exists, the site shows a "DK" placeholder, so nothing looks broken.
 
-Main photos
-- dk-hero.webp          Main portrait (home page fallback, press kit, gallery). Portrait 4:5 works best.
-- dk-cutout.webp        Transparent cut-out (PNG-style background removed) used in the home hero. Optional.
-- dk-about.webp         About sections and the /links avatar. Square-ish crop works best.
-- dk-cutout-about.webp  Transparent cut-out for the About sections. Optional.
+Included now
+- dk-hero.webp        Studio portrait: home hero, press kit, /links avatar fallback.
+- dk-about.webp       Upper-body crop of the studio portrait: About sections and the /links avatar.
+- dk-portrait-1.webp  With the crew (night).   Gallery, tag "Moments".
+- dk-portrait-2.webp  With a friend (garden).  Gallery, tag "Moments".
 
-Gallery (any that exist appear automatically; missing ones are skipped)
-- dk-portrait-1.webp ... dk-portrait-3.webp   More portraits / selfies
-- dk-show-1.webp ... dk-show-3.webp           Live shows (the first is also the Shows section backdrop)
+Optional
+- dk-cutout.webp / dk-cutout-about.webp  Transparent cut-outs (background removed). When present they replace the framed photo in the hero and About.
+- dk-portrait-3.webp                      Another portrait.
+- dk-show-1.webp ... dk-show-3.webp       Live shows (the first is also the Shows backdrop).
 
-Edit the `gallery` list in src/data/siteContent.js to add more.
-Only publish photos Doggy Kizz has approved.
+Edit the `gallery` list in src/data/siteContent.js to change captions or add more.
+Only publish photos Doggy Kizz has approved, and check everyone shown in group photos is happy to appear.

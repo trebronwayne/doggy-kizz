@@ -1444,3 +1444,91 @@ textarea.fl-input { resize: vertical; min-height: 84px; }
 .fire-art-stamp img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 8px 14px rgba(0, 0, 0, .45)); }
 .footer-logo { width: 28px; height: 28px; object-fit: contain; flex: 0 0 auto; }
 @media (max-width: 760px) { .fire-mark { width: 96px; height: 96px; } .fire-art-stamp { width: 96px; height: 96px; left: 0; bottom: 12px; } }
+
+/* ==========================================================================
+   v12 — formal polish + artist photography
+   A final, restrained layer: consistent hairlines, flat Fluent surfaces,
+   an even photo grid and a gallery that reads like a press portfolio.
+   Remove this block to return to the previous look.
+   ========================================================================== */
+
+/* Rhythm and readability */
+body { font-size: 15px; line-height: 1.6; }
+.section-block { padding-block: clamp(48px, 7vw, 88px); }
+.section-heading { margin-bottom: 32px; }
+.section-heading h2, .about-preview-copy h2, .booking-strip h2, .platform-panel h2, .enquiry h2 { font-weight: 600; font-size: clamp(28px, 3.6vw, 40px); line-height: 1.12; }
+.section-intro, .page-intro { max-width: 60ch; color: var(--text-2); line-height: 1.65; }
+.eyebrow { font-size: 11px; letter-spacing: .12em; font-weight: 600; color: var(--accent-text); }
+
+/* Header: flat bar, hairline, underline on the active page */
+.site-header { box-shadow: none; border-bottom: 1px solid var(--line); }
+.nav-link { position: relative; font-weight: 500; box-shadow: none !important; background: transparent !important; }
+.nav-link:hover { color: var(--text); }
+.nav-link.active { color: var(--text); font-weight: 600; }
+.nav-link.active::after { content: ''; position: absolute; left: 15px; right: 15px; bottom: 2px; height: 2px; border-radius: 2px; background: var(--accent); }
+.theme-toggle, .menu-toggle { box-shadow: none; border-radius: var(--r-sm); }
+
+/* Buttons: flat, confident, accessible */
+.button { min-height: 44px; padding: 0 22px; border-radius: var(--r-sm); font-weight: 600; letter-spacing: .01em; box-shadow: none; transition: background-color .2s, border-color .2s, color .2s, transform .2s var(--ease); }
+.button:hover { transform: none; }
+.button--accent { background: var(--accent); color: var(--on-accent); }
+.button--accent:hover { background: var(--accent-2); }
+.button--outline, .button--soft, .button--light { background: transparent; border-color: var(--line-strong); color: var(--text); }
+.button--outline:hover, .button--soft:hover, .button--light:hover { background: var(--surface-2); border-color: var(--accent); color: var(--text); }
+
+/* Hero portrait: framed like an editorial cover */
+.hero-photo { border-radius: var(--r); border: 1px solid var(--line-strong); box-shadow: 0 24px 60px -24px rgba(0, 0, 0, .55); }
+.hero-photo > img { object-position: 50% 14%; }
+.hero-photo::before { content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none; background: linear-gradient(180deg, transparent 62%, rgba(8, 8, 10, .55)); }
+.hero-photo::after, .photo-frame::after { background: transparent; }
+.hero-now { border-radius: var(--r-sm); box-shadow: 0 12px 32px -12px rgba(0, 0, 0, .55); }
+.hero-now-play { border-radius: var(--r-sm); }
+
+/* About portraits */
+.about-photo, .artist-bio-photo { border-radius: var(--r); border: 1px solid var(--line-strong); box-shadow: 0 24px 60px -28px rgba(0, 0, 0, .5); }
+.about-photo > img, .artist-bio-photo > img { object-position: 50% 18%; }
+.links-avatar { border: 2px solid var(--accent); box-shadow: none; }
+.links-avatar > img { object-position: 50% 14%; }
+
+/* Gallery: an even, tidy grid with caption on hover/focus */
+.gallery-grid { columns: auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
+.gallery-tile { margin: 0; aspect-ratio: 4 / 5; border-radius: var(--r); border: 1px solid var(--line); background: var(--surface-2); box-shadow: none; transition: border-color .25s, transform .3s var(--ease); }
+.gallery-tile:hover { transform: translateY(-3px); border-color: var(--accent); box-shadow: 0 18px 40px -22px rgba(0, 0, 0, .6); }
+.gallery-tile img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 22%; }
+.gallery-tile:hover img { transform: scale(1.03); }
+.gallery-tile::before { content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(180deg, transparent 58%, rgba(8, 8, 10, .6)); opacity: .0; transition: opacity .3s; }
+.gallery-tile:hover::before, .gallery-tile:focus-visible::before { opacity: 1; }
+.gallery-tag { z-index: 3; left: 12px; top: 12px; padding: 5px 10px; border-radius: var(--r-sm); background: rgba(12, 13, 15, .72); color: #f1e6cf; box-shadow: none; font-size: 10px; letter-spacing: .1em; -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+.gallery-zoom { z-index: 3; border-radius: var(--r-sm); }
+.chip { border-radius: var(--r-sm); box-shadow: none; background: transparent; border-color: var(--line-strong); font-weight: 600; letter-spacing: .02em; }
+.chip:hover { border-color: var(--accent); color: var(--text); }
+.chip--on, .chip--on:hover { background: var(--accent); border-color: var(--accent); color: var(--on-accent); box-shadow: none; }
+
+/* Lightbox */
+.lightbox { background: rgba(6, 7, 9, .94); }
+.lightbox img { border-radius: var(--r-sm); box-shadow: 0 30px 80px rgba(0, 0, 0, .7); }
+.lightbox-btn { border-radius: var(--r-sm); }
+
+/* Press kit thumbnails */
+.press-item, .press-thumb { border-radius: var(--r); }
+.press-item { border: 1px solid var(--line); box-shadow: none; }
+
+/* Cards and panels: flat layers with hairlines */
+.release-art, .glance-card, .listen-card, .contact-option, .show-row, .next-show, .shows-empty, .enquiry, .platform-panel, .press-bio, .press-contact { box-shadow: none; border: 1px solid var(--line); border-radius: var(--r); }
+.glance-card { background: var(--surface); }
+.glance-card small { letter-spacing: .1em; }
+.booking-strip { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+
+/* Forms */
+.field input, .field textarea { border-radius: var(--r-sm); }
+.field input:focus, .field textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+
+/* Keyboard focus, everywhere */
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: var(--r-sm); }
+
+/* Phones: keep the gallery two across and calm */
+@media (max-width: 760px) {
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .gallery-tile { border-radius: var(--r-sm); }
+  .section-block { padding-block: 44px; }
+}
