@@ -8,8 +8,10 @@ Included now
 - dk-portrait-1.webp  With the crew (night).   Gallery, tag "Moments".
 - dk-portrait-2.webp  With a friend (garden).  Gallery, tag "Moments".
 
+Cut-outs (included, made automatically, a draft)
+- dk-cutout.webp / dk-cutout-about.webp  Transparent cut-outs. They replace the framed photo in the hero and About. Replace them with a cleaner cut-out any time (same file names).
+
 Optional
-- dk-cutout.webp / dk-cutout-about.webp  Transparent cut-outs (background removed). When present they replace the framed photo in the hero and About.
 - dk-portrait-3.webp                      Another portrait.
 - dk-show-1.webp ... dk-show-3.webp       Live shows (the first is also the Shows backdrop).
 

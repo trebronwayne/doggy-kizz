@@ -6,7 +6,7 @@ import {
 } from 'lucide-react';
 import SiteLayout, { SocialLinks, BrandIcon } from './components/SiteLayout';
 import { siteContent as content } from './data/siteContent';
-import { Countdown, Gallery, useAvailableImages } from './components/Dynamic';
+import { Countdown, useAvailableImages } from './components/Dynamic';
 import ThemeToggle from './components/ThemeToggle';
 import { Catalog, LatestRelease, LivePerformances, MostWatched } from './components/Catalog';
 import { songs as catalogSongs } from './data/catalog';
@@ -221,8 +221,6 @@ function HomePage() {
         <div className="about-preview-copy"><p className="eyebrow">BEHIND THE MUSIC</p><h2>{content.aboutTitle}</h2><p>{content.biography}</p><Link to="/about" className="text-link">More about Doggy Kizz <ArrowUpRight size={16} /></Link></div>
       </section>
 
-      <Gallery eyebrow="GALLERY" title="Portraits and moments." text="A closer look at Doggy Kizz, in the studio and with the crew." id="gallery" />
-
       <Shows />
       <BookingStrip />
     </>
@@ -259,7 +257,6 @@ function AboutPage() {
       ['Latest release', content.releases[0].title],
       ['Songs', `${Math.floor(catalogSongs.length / 5) * 5}+ released`],
     ].map(([label, value]) => <div className="glance-card" key={label}><small>{label}</small><b>{value}</b></div>)}</div>
-    <Gallery eyebrow="MOMENTS" title="In the moment." text="Live shows, the crew and the work behind the sound." id="gallery" />
     {content.milestones.length > 0 && <div className="timeline-wrap"><p className="eyebrow">THE JOURNEY</p><ol className="timeline">{content.milestones.map((item) => <li key={`${item.year}-${item.title}`}><span>{item.year}</span><div><h3>{item.title}</h3>{item.text && <p>{item.text}</p>}</div></li>)}</ol></div>}
   </PageShell>;
 }
