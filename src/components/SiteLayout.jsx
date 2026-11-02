@@ -4,7 +4,6 @@ import { ArrowUp, ArrowUpRight, Download, Menu, X } from 'lucide-react';
 import { siX, siYoutube, siSoundcloud, siApplemusic, siInstagram, siTiktok, siFacebook, siWhatsapp } from 'simple-icons';
 import { siteContent } from '../data/siteContent';
 import ThemeToggle from './ThemeToggle';
-import { useTheme } from '../theme';
 import { usePwaInstall } from '../pwa';
 import { cmsEnabled } from '../lib/cms';
 import { AnnouncementBar, SubscribeForm } from './Cms';
@@ -105,7 +104,6 @@ function Header() {
 }
 
 function Footer() {
-  const { followsSystem, matchSystem } = useTheme();
   const { state: installState, install } = usePwaInstall();
   const [iosHint, setIosHint] = useState(false);
   return (
@@ -122,7 +120,7 @@ function Footer() {
         <SocialLinks compact />
       </div>
       {cmsEnabled && <div className="wrap footer-subscribe"><div><b>Get news and new releases</b><p>One email when there is something worth sharing.</p></div><SubscribeForm source="footer" /></div>}
-      <div className="wrap footer-bottom"><span>© {new Date().getFullYear()} Doggy Kizz. All rights reserved.</span><span className="footer-meta"><button type="button" className="footer-link" onClick={matchSystem} disabled={followsSystem}>{followsSystem ? 'Theme: matches your device' : 'Match my device theme'}</button>
+      <div className="wrap footer-bottom"><span>© {new Date().getFullYear()} Doggy Kizz. All rights reserved.</span><span className="footer-meta">
           {installState === 'prompt' && <button type="button" className="install-btn" onClick={install}><Download size={14} aria-hidden="true" /> Install app</button>}
           {installState === 'ios' && <button type="button" className="install-btn" aria-expanded={iosHint} onClick={() => setIosHint((value) => !value)}><Download size={14} aria-hidden="true" /> Add to Home Screen</button>}
           {installState === 'ios' && iosHint && <span className="install-hint" role="status">In Safari, tap the Share button, then “Add to Home Screen”.</span>}

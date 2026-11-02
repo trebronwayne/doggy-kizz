@@ -1,9 +1,8 @@
 import { useSyncExternalStore } from 'react';
 
-// Theme model: visitors follow their device setting until they press the toggle.
-// After that their choice is remembered. "Match system" clears the choice again.
+// Theme model: dark by default. Once a visitor presses the toggle, their choice is remembered.
 const KEY = 'dk-theme';
-const COLORS = { dark: '#07080c', light: '#f5f6fa' };
+const COLORS = { dark: '#0c0908', light: '#f8f3ee' };
 const listeners = new Set();
 const query = () => window.matchMedia('(prefers-color-scheme: dark)');
 
@@ -18,7 +17,8 @@ function readStored() {
 
 let explicit = typeof window === 'undefined' ? null : readStored();
 
-const systemTheme = () => (query().matches ? 'dark' : 'light');
+// Dark is the default for every visitor until they press the toggle.
+const systemTheme = () => 'dark';
 const current = () => explicit ?? systemTheme();
 
 function apply(animate) {

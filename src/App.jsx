@@ -224,14 +224,6 @@ function HomePage() {
   const latest = content.releases[0];
   const [first, ...rest] = content.artistName.split(' ');
   const wa = whatsappUrl('Hello, I would like to book Doggy Kizz.');
-  const songCount = `${Math.floor(catalogSongs.length / 5) * 5}+`;
-  const ticker = [`${latest.title} · out now`, `${content.appleMusicSingle.title} · on Apple Music`, 'Book Doggy Kizz', content.artistTagline];
-  const stats = [
-    [songCount, 'Songs released'],
-    [latest.title, 'Latest release'],
-    [String(content.socialLinks.length), 'Streaming platforms'],
-    [content.locationLine, 'Home base'],
-  ];
   return (
     <>
       <section className="home-hero">
@@ -259,12 +251,6 @@ function HomePage() {
         </div>
       </section>
 
-      <div className="ticker" aria-hidden="true"><div className="ticker-track">{[0, 1].map((n) => <div className="ticker-group" key={n}>{ticker.map((item) => <span key={`${n}-${item}`}>{item}<i>✦</i></span>)}</div>)}</div></div>
-
-      <section className="wrap stats-row" aria-label="Doggy Kizz at a glance">
-        {stats.map(([value, label]) => <div className="stat" key={label}><b>{value}</b><small>{label}</small></div>)}
-      </section>
-
       <LatestRelease />
 
       <section className="section-block wrap" id="stream">
@@ -283,11 +269,6 @@ function HomePage() {
       <section className="section-block wrap" id="favourites">
         <SectionHeading eyebrow="FAN FAVOURITES" title="Popular songs" action="All videos" to="/videos" />
         <MostWatched count={4} />
-      </section>
-
-      <section className="about-preview wrap">
-        <div className="about-preview-image"><CutoutPortrait cutout={content.images.aboutCutout} photo={content.images.about} alt={`${content.artistName} artist portrait`} tint="green" className="about-photo" /></div>
-        <div className="about-preview-copy"><p className="eyebrow">BEHIND THE MUSIC</p><h2>{content.aboutTitle}</h2><p>{content.biography}</p><div className="about-preview-actions"><Link to="/about" className="button button--outline">More about Doggy Kizz <ArrowUpRight size={16} /></Link><a href={content.appleMusic} target="_blank" rel="noreferrer" className="text-link"><BrandIcon name="Apple Music" size={16} /> Apple Music profile</a></div></div>
       </section>
 
       <BookingStrip showOffers />
