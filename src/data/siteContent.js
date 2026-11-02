@@ -26,7 +26,7 @@ export const siteContent = {
   // Until a file exists the site shows a neat "DK" placeholder instead, so nothing looks broken.
   images: {
     hero: asset('images/dk-hero.webp'),
-    heroCutout: asset('images/dk-cutout-hero.webp'),
+    heroCutout: asset('images/dk-home-hero.webp'), // home page only; other pages keep the studio portrait
     aboutCutout: asset('images/dk-cutout-about.webp'),
     about: asset('images/dk-about.webp'),
   },
