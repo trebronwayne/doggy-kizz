@@ -35,6 +35,7 @@ const brandIcons = {
   instagram: siInstagram,
   tiktok: siTiktok,
   facebook: siFacebook,
+  whatsapp: siWhatsapp,
 };
 
 export function BrandIcon({ name, size = 16 }) {
@@ -47,11 +48,14 @@ export function BrandIcon({ name, size = 16 }) {
   );
 }
 
-export function SocialLinks({ compact = false }) {
+export function SocialLinks({ compact = false, withWhatsApp = false }) {
+  const number = siteContent.booking.whatsappNumber.replace(/\D/g, '');
+  const links = [...siteContent.socialLinks];
+  if (withWhatsApp && number.length > 5) links.push({ label: 'WhatsApp', href: `https://wa.me/${number}` });
   return (
     <div className={`social-links ${compact ? 'social-links--compact' : ''}`}>
-      {siteContent.socialLinks.map((social) => (
-        <a key={social.label} href={social.href} target="_blank" rel="noreferrer" aria-label={social.label} title={social.label}>
+      {links.map((social) => (
+        <a key={social.label} data-brand={social.label.toLowerCase().replace(/\s+/g, '-')} href={social.href} target="_blank" rel="noreferrer" aria-label={social.label} title={social.label}>
           <BrandIcon name={social.label} />{!compact && <span>{social.label}</span>}
         </a>
       ))}
@@ -93,7 +97,7 @@ function Header() {
               {item.label}
             </NavLink>
           ))}
-          <Link className="nav-booking" to="/booking" onClick={close}>Booking <ArrowUpRight size={15} /></Link>
+          <Link className="nav-booking" to="/booking" onClick={close}>Book now <ArrowUpRight size={15} /></Link>
         </nav>
       </div>
     </header>

@@ -4,6 +4,7 @@ Until a file exists, the site shows a "DK" placeholder, so nothing looks broken.
 
 Included now
 - dk-hero.webp        Studio portrait: home hero, press kit, /links avatar fallback.
+- dk-cutout-hero.webp  Head-to-thigh cut-out used big in the home hero (replace with a cleaner cut-out, same name).
 - dk-about.webp       Upper-body crop of the studio portrait: About sections and the /links avatar.
 - dk-portrait-1.webp  With the crew (night).   Gallery, tag "Moments".
 - dk-portrait-2.webp  With a friend (garden).  Gallery, tag "Moments".

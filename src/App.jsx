@@ -61,8 +61,32 @@ function VideoFeature({ video, large = false }) {
   );
 }
 
-function BookingStrip() {
-  return <section className="booking-strip"><div className="wrap booking-strip-inner"><div><p className="eyebrow">BOOKINGS · COLLABORATIONS · MEDIA</p><h2>{content.booking.heading}</h2><p>{content.booking.text}</p></div><Link to="/booking" className="button button--light">Make an enquiry <ArrowUpRight size={17} /></Link></div></section>;
+const whatsappUrl = (text) => {
+  const number = content.booking.whatsappNumber.replace(/\D/g, '');
+  return number.length > 5 ? `https://wa.me/${number}${text ? `?text=${encodeURIComponent(text)}` : ''}` : null;
+};
+const offerIcons = [Mic2, Disc3, Globe2, Headphones];
+
+function BookingStrip({ showOffers = false }) {
+  const wa = whatsappUrl('Hello, I would like to book Doggy Kizz.');
+  return (
+    <section className="booking-strip booking-promo">
+      <div className="wrap">
+        <div className="booking-strip-inner">
+          <div>
+            <p className="eyebrow">BOOKINGS · COLLABORATIONS · MEDIA</p>
+            <h2>{content.booking.heading} for your next event.</h2>
+            <p>{content.booking.text}</p>
+          </div>
+          <div className="booking-promo-actions">
+            {wa && <a className="button button--accent button--lg" href={wa} target="_blank" rel="noreferrer"><BrandIcon name="WhatsApp" size={18} /> Book on WhatsApp</a>}
+            <Link to="/booking" className="button button--outline button--lg">Send an enquiry <ArrowUpRight size={17} /></Link>
+          </div>
+        </div>
+        {showOffers && <ul className="offer-grid">{content.booking.offers.map((offer, i) => { const Icon = offerIcons[i % offerIcons.length]; return <li key={offer.title}><span className="offer-icon"><Icon size={20} aria-hidden="true" /></span><b>{offer.title}</b><small>{offer.text}</small></li>; })}</ul>}
+      </div>
+    </section>
+  );
 }
 
 function formatShowDate(value) {
@@ -188,28 +212,73 @@ function EnquiryForm() {
 
 const heroCutoutItems = [{ src: content.images.heroCutout }];
 
+const streamNotes = {
+  'Apple Music': () => `Stream “${content.appleMusicSingle.title}” and more`,
+  YouTube: () => `${catalogSongs.length} songs and videos`,
+  TikTok: () => 'Clips, challenges and updates',
+};
+
 function HomePage() {
   const cutoutList = useAvailableImages(heroCutoutItems);
   const cutout = cutoutList && cutoutList[0];
+  const latest = content.releases[0];
+  const [first, ...rest] = content.artistName.split(' ');
+  const wa = whatsappUrl('Hello, I would like to book Doggy Kizz.');
+  const songCount = `${Math.floor(catalogSongs.length / 5) * 5}+`;
+  const ticker = [`${latest.title} · out now`, `${content.appleMusicSingle.title} · on Apple Music`, 'Book Doggy Kizz', content.artistTagline];
+  const stats = [
+    [songCount, 'Songs released'],
+    [latest.title, 'Latest release'],
+    [String(content.socialLinks.length), 'Streaming platforms'],
+    [content.locationLine, 'Home base'],
+  ];
   return (
     <>
-      <section className="hero wrap">
-        <div className="hero-copy">
-          <h1>{content.artistName}</h1>
-          <p className="hero-tagline">{content.heroText}</p>
-          <p className="hero-genres">{content.genres.join(' · ')}</p>
-          <div className="hero-actions"><Link to="/music" className="button button--accent">Explore the music <ArrowUpRight size={17} /></Link><Link to="/about" className="button button--outline">Meet the artist</Link></div>
-        </div>
-        <div className={`hero-visual ${cutout ? 'hero-visual--cutout' : ''}`}>
-          <div className="hero-glow" aria-hidden="true" />
-          {cutout
-            ? <img className="hero-cutout" src={cutout.src} alt={`${content.artistName} portrait`} fetchPriority="high" decoding="async" />
-            : <Photo src={content.images.hero} alt={`${content.artistName} portrait`} className="hero-photo" fallback="DK" />}
-          <Link className="hero-now" to={watchPath(content.releases[0].youtubeId)}><span className="hero-now-play"><Play size={15} fill="currentColor" /></span><span><small>LATEST RELEASE</small><b>{content.releases[0].title}</b></span></Link>
+      <section className="home-hero">
+        <div className="home-hero-bg" aria-hidden="true" />
+        <div className="wrap home-hero-grid">
+          <div className="home-hero-copy">
+            <p className="home-kicker"><span className="status-dot" /> {content.heroKicker} <b>{latest.title}</b></p>
+            <h1 className="home-hero-title"><span>{first}</span><span>{rest.join(' ')}</span></h1>
+            <p className="home-hero-tagline">{content.heroText}</p>
+            <p className="home-hero-genres">{content.genres.join(' · ')}</p>
+            <div className="hero-actions">
+              <Link to={watchPath(latest.youtubeId)} className="button button--accent button--lg"><Play size={17} fill="currentColor" /> Watch {latest.title}</Link>
+              <a href={content.appleMusic} target="_blank" rel="noreferrer" className="button button--outline button--lg"><BrandIcon name="Apple Music" size={18} /> Apple Music</a>
+              {wa && <a href={wa} target="_blank" rel="noreferrer" className="button button--ghost button--lg">Book now <ArrowUpRight size={17} /></a>}
+            </div>
+            <div className="hero-platforms"><span>FOLLOW</span><SocialLinks compact withWhatsApp /></div>
+          </div>
+          <div className={`home-hero-visual ${cutout ? '' : 'home-hero-visual--photo'}`}>
+            <div className="home-hero-ring" aria-hidden="true" />
+            {cutout
+              ? <img className="home-hero-cutout" src={cutout.src} alt={`${content.artistName} portrait`} fetchPriority="high" decoding="async" />
+              : <Photo src={content.images.hero} alt={`${content.artistName} portrait`} className="home-hero-photo" fallback="DK" />}
+            <Link className="home-hero-card" to={watchPath(latest.youtubeId)}><span className="hero-now-play"><Play size={15} fill="currentColor" /></span><span><small>NEW RELEASE</small><b>{latest.title}</b></span></Link>
+          </div>
         </div>
       </section>
 
+      <div className="ticker" aria-hidden="true"><div className="ticker-track">{[0, 1].map((n) => <div className="ticker-group" key={n}>{ticker.map((item) => <span key={`${n}-${item}`}>{item}<i>✦</i></span>)}</div>)}</div></div>
+
+      <section className="wrap stats-row" aria-label="Doggy Kizz at a glance">
+        {stats.map(([value, label]) => <div className="stat" key={label}><b>{value}</b><small>{label}</small></div>)}
+      </section>
+
       <LatestRelease />
+
+      <section className="section-block wrap" id="stream">
+        <SectionHeading eyebrow="STREAM EVERYWHERE" title="Hear it your way." text="Follow Doggy Kizz on every platform so you never miss a release." />
+        <div className="stream-grid">
+          {content.socialLinks.map((link) => (
+            <a key={link.label} className="stream-card" data-brand={link.label.toLowerCase().replace(/\s+/g, '-')} href={link.href} target="_blank" rel="noreferrer">
+              <span className="stream-icon"><BrandIcon name={link.label} size={26} /></span>
+              <div><b>{link.label}</b><small>{(streamNotes[link.label] || (() => `Open on ${link.label}`))()}</small></div>
+              <ArrowUpRight size={18} aria-hidden="true" />
+            </a>
+          ))}
+        </div>
+      </section>
 
       <section className="section-block wrap" id="favourites">
         <SectionHeading eyebrow="FAN FAVOURITES" title="Popular songs" action="All videos" to="/videos" />
@@ -218,11 +287,11 @@ function HomePage() {
 
       <section className="about-preview wrap">
         <div className="about-preview-image"><CutoutPortrait cutout={content.images.aboutCutout} photo={content.images.about} alt={`${content.artistName} artist portrait`} tint="green" className="about-photo" /></div>
-        <div className="about-preview-copy"><p className="eyebrow">BEHIND THE MUSIC</p><h2>{content.aboutTitle}</h2><p>{content.biography}</p><Link to="/about" className="text-link">More about Doggy Kizz <ArrowUpRight size={16} /></Link></div>
+        <div className="about-preview-copy"><p className="eyebrow">BEHIND THE MUSIC</p><h2>{content.aboutTitle}</h2><p>{content.biography}</p><div className="about-preview-actions"><Link to="/about" className="button button--outline">More about Doggy Kizz <ArrowUpRight size={16} /></Link><a href={content.appleMusic} target="_blank" rel="noreferrer" className="text-link"><BrandIcon name="Apple Music" size={16} /> Apple Music profile</a></div></div>
       </section>
 
+      <BookingStrip showOffers />
       <Shows />
-      <BookingStrip />
     </>
   );
 }
@@ -247,9 +316,15 @@ function VideosPage() {
 }
 
 function AboutPage() {
+  const single = content.appleMusicSingle;
   return <PageShell eyebrow="THE ARTIST" title="About Doggy Kizz" intro="The voice, the vision and the journey behind the music." number="03">
-    <div className="artist-bio-layout"><CutoutPortrait cutout={content.images.aboutCutout} photo={content.images.about} alt={`${content.artistName} portrait`} tint="green" className="artist-bio-photo" /><div className="artist-bio-copy"><p className="eyebrow">MUSIC · CULTURE · CONNECTION</p><h2>{content.aboutTitle}</h2><p>{content.biography}</p><SocialLinks /></div></div>
+    <div className="artist-bio-layout"><CutoutPortrait cutout={content.images.aboutCutout} photo={content.images.about} alt={`${content.artistName} portrait`} tint="green" className="artist-bio-photo" /><div className="artist-bio-copy"><p className="eyebrow">MUSIC · CULTURE · CONNECTION</p><h2>{content.aboutTitle}</h2><p>{content.biography}</p><SocialLinks withWhatsApp /></div></div>
     <div className="genre-row"><span>THE SOUND</span>{content.genres.map((genre, i) => <span className="genre-item" key={genre}>{i > 0 && <i>×</i>}<b>{genre}</b></span>)}</div>
+    <div className="apple-panel">
+      <span className="apple-panel-icon"><BrandIcon name="Apple Music" size={30} /></span>
+      <div className="apple-panel-copy"><p className="eyebrow">ON APPLE MUSIC</p><h2>{content.artistName}</h2><p>{single.title} · Single · {single.year}</p></div>
+      <div className="apple-panel-actions"><a className="button button--accent" href={single.href} target="_blank" rel="noreferrer"><Play size={16} fill="currentColor" /> Play {single.title}</a><a className="button button--outline" href={content.appleMusic} target="_blank" rel="noreferrer">Artist profile <ArrowUpRight size={16} /></a></div>
+    </div>
     <div className="glance">{[
       ['Role', 'Singer & songwriter'],
       ['Based in', content.locationLine],
@@ -263,13 +338,23 @@ function AboutPage() {
 
 function BookingPage() {
   const hasEmail = Boolean(content.booking.email);
-  const phone = content.booking.whatsappNumber.replace(/\D/g, '');
-  const hasWhatsapp = phone.length > 5;
-  return <PageShell eyebrow="GET IN TOUCH" title="Booking" intro={content.booking.text} number="04">
-    <div className="contact-layout"><div className="contact-lead"><span className="contact-icon"><Mail size={24} /></span><h2>Contact</h2><p>For shows, bookings, features, collaborations and media enquiries, use the official channels below.</p><SocialLinks /></div><div className="contact-options">
+  const wa = whatsappUrl('Hello, I would like to book Doggy Kizz. Event type: \nDate: \nLocation: ');
+  return <PageShell eyebrow="GET IN TOUCH" title="Book Doggy Kizz" intro={content.booking.text} number="04">
+    <div className="book-hero">
+      <div><p className="eyebrow">FASTEST WAY TO BOOK</p><h2>Message the team on WhatsApp.</h2><p>Share the event, date and location and you will get a reply with availability and terms.</p></div>
+      {wa && <a className="button button--accent button--lg" href={wa} target="_blank" rel="noreferrer"><BrandIcon name="WhatsApp" size={18} /> Start a WhatsApp chat</a>}
+    </div>
+    <div className="book-section"><p className="eyebrow">WHAT YOU CAN BOOK</p>
+      <ul className="offer-grid offer-grid--page">{content.booking.offers.map((offer, i) => { const Icon = offerIcons[i % offerIcons.length]; return <li key={offer.title}><span className="offer-icon"><Icon size={20} aria-hidden="true" /></span><b>{offer.title}</b><small>{offer.text}</small></li>; })}</ul>
+    </div>
+    <div className="book-section"><p className="eyebrow">HOW IT WORKS</p>
+      <ol className="steps-grid">{content.booking.steps.map((step, i) => <li key={step.title}><span>{String(i + 1).padStart(2, '0')}</span><b>{step.title}</b><small>{step.text}</small></li>)}</ol>
+    </div>
+    <div className="contact-layout"><div className="contact-lead"><span className="contact-icon"><Mail size={24} /></span><h2>Official channels</h2><p>For shows, features, collaborations and media enquiries, reach Doggy Kizz through any channel below.</p><SocialLinks withWhatsApp /></div><div className="contact-options">
       {hasEmail && <a className="contact-option" href={`mailto:${content.booking.email}`}><span><Mail size={19} /></span><div><b>Booking email</b><small>{content.booking.email}</small></div><ArrowUpRight size={18} /></a>}
       {content.booking.phone && <a className="contact-option" href={`tel:${content.booking.phone.replace(/\s/g, '')}`}><span><Phone size={19} /></span><div><b>Call</b><small>{content.booking.phone}</small></div><ArrowUpRight size={18} /></a>}
-      {hasWhatsapp && <a className="contact-option" href={`https://wa.me/${phone}`} target="_blank" rel="noreferrer"><span><Smartphone size={19} /></span><div><b>WhatsApp enquiries</b><small>Chat on WhatsApp</small></div><ArrowUpRight size={18} /></a>}
+      {wa && <a className="contact-option" href={wa} target="_blank" rel="noreferrer"><span><Smartphone size={19} /></span><div><b>WhatsApp enquiries</b><small>Chat on WhatsApp</small></div><ArrowUpRight size={18} /></a>}
+      <a className="contact-option" href={content.appleMusic} target="_blank" rel="noreferrer"><span><BrandIcon name="Apple Music" size={19} /></span><div><b>Apple Music</b><small>Artist profile</small></div><ArrowUpRight size={18} /></a>
       <a className="contact-option" href={content.youtubeChannel} target="_blank" rel="noreferrer"><span><Play size={19} /></span><div><b>YouTube channel</b><small>Videos and music</small></div><ArrowUpRight size={18} /></a>
     </div></div>
     <EnquiryForm />
