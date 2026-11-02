@@ -6,8 +6,8 @@
   "start_url": "./?source=pwa",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#14171a",
-  "theme_color": "#14171a",
+  "background_color": "#07080c",
+  "theme_color": "#07080c",
   "lang": "en",
   "categories": [
     "music",

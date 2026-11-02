@@ -3,7 +3,7 @@ import { useSyncExternalStore } from 'react';
 // Theme model: visitors follow their device setting until they press the toggle.
 // After that their choice is remembered. "Match system" clears the choice again.
 const KEY = 'dk-theme';
-const COLORS = { dark: '#14171a', light: '#e8ecf1' };
+const COLORS = { dark: '#07080c', light: '#f5f6fa' };
 const listeners = new Set();
 const query = () => window.matchMedia('(prefers-color-scheme: dark)');
 

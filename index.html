@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#0b0c0e" />
+    <meta name="theme-color" content="#07080c" />
     <meta name="color-scheme" content="dark light" />
     <!-- Runs before first paint: use the saved choice, otherwise the device setting. Prevents a theme flash. -->
     <script>
@@ -15,7 +15,7 @@
           var root = document.documentElement;
           root.setAttribute('data-theme', theme);
           root.style.colorScheme = theme;
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', theme === 'dark' ? '#0b0c0e' : '#f3f5f7');
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', theme === 'dark' ? '#07080c' : '#f5f6fa');
         } catch (e) {}
       })();
     </script>

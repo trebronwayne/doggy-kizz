@@ -1532,3 +1532,91 @@ body { font-size: 15px; line-height: 1.6; }
   .gallery-tile { border-radius: var(--r-sm); }
   .section-block { padding-block: 44px; }
 }
+
+/* ==========================================================================
+   v13 — new colour themes: "Midnight" (dark) and "Pearl" (light)
+   Ink-navy darks and cool pearl lights with one electric-violet accent,
+   so the warm studio photography stands out. Only colours change here;
+   every component already reads these tokens. Edit this block to retune.
+   ========================================================================== */
+:root, :root[data-theme='dark'] {
+  --bg: #07080c; --surface: #0f1117; --surface-2: #161923;
+  --text: #f3f4f8; --text-2: #c2c6d2; --muted: #8b91a3;
+  --line: rgba(255, 255, 255, .08); --line-strong: rgba(255, 255, 255, .2);
+  --accent: #8b7bff; --accent-2: #a79aff; --accent-text: #b1a6ff; --on-accent: #0b0a18;
+  --accent-soft: rgba(139, 123, 255, .14);
+  --accent-grad: linear-gradient(135deg, #a79aff 0%, #7b6bff 100%);
+  --glow: rgba(124, 108, 255, .18);
+  --orange: #ff8f6b;
+  --header-bg: rgba(7, 8, 12, .86);
+  --ph-1: #12141b; --ph-2: #191c27; --ph-3: #20182b;
+  --art-0: linear-gradient(145deg, #232046, #12111f);
+  --art-1: linear-gradient(145deg, #2b2142, #15111f);
+  --art-2: linear-gradient(145deg, #1d2748, #0f1424);
+  --art-3: linear-gradient(145deg, #1a3340, #0f1a21);
+  --art-text: #f3f4f8;
+  --fl-canvas: #07080c; --fl-layer: #0f1117; --fl-layer-2: #161923;
+  --fl-fg: #f3f4f8; --fl-fg-2: #c2c6d2; --fl-fg-3: #8b91a3;
+  --fl-brand-tint: rgba(139, 123, 255, .14);
+  color-scheme: dark;
+}
+:root[data-theme='light'] {
+  --bg: #f5f6fa; --surface: #ffffff; --surface-2: #eef0f6;
+  --text: #12141c; --text-2: #3a3f52; --muted: #5b6176;
+  --line: rgba(18, 20, 28, .1); --line-strong: rgba(18, 20, 28, .28);
+  --accent: #5b45f0; --accent-2: #6f5bff; --accent-text: #4631d4; --on-accent: #ffffff;
+  --accent-soft: rgba(91, 69, 240, .1);
+  --accent-grad: linear-gradient(135deg, #6f5bff 0%, #4f39e6 100%);
+  --glow: rgba(91, 69, 240, .12);
+  --orange: #d9532b;
+  --header-bg: rgba(245, 246, 250, .88);
+  --ph-1: #e9ebf3; --ph-2: #e1e4ef; --ph-3: #ece6f3;
+  --art-0: linear-gradient(145deg, #e4e0ff, #cfc8fb);
+  --art-1: linear-gradient(145deg, #f2ddf0, #e1c3e0);
+  --art-2: linear-gradient(145deg, #d9e3fb, #bccdf3);
+  --art-3: linear-gradient(145deg, #d6ecef, #b7d9de);
+  --art-text: #12141c;
+  --fl-canvas: #f5f6fa; --fl-layer: #ffffff; --fl-layer-2: #eef0f6;
+  --fl-fg: #12141c; --fl-fg-2: #3a3f52; --fl-fg-3: #5b6176;
+  --fl-brand-tint: rgba(91, 69, 240, .1);
+  color-scheme: light;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+    --bg: #f5f6fa; --surface: #ffffff; --surface-2: #eef0f6;
+    --text: #12141c; --text-2: #3a3f52; --muted: #5b6176;
+    --line: rgba(18, 20, 28, .1); --line-strong: rgba(18, 20, 28, .28);
+    --accent: #5b45f0; --accent-2: #6f5bff; --accent-text: #4631d4; --on-accent: #ffffff;
+    --accent-soft: rgba(91, 69, 240, .1); --accent-grad: linear-gradient(135deg, #6f5bff 0%, #4f39e6 100%);
+    --glow: rgba(91, 69, 240, .12); --header-bg: rgba(245, 246, 250, .88);
+  }
+}
+
+/* A soft violet aura at the top of every page */
+body { background-color: var(--bg); background-image: radial-gradient(900px 520px at 88% -8%, var(--glow), transparent 62%), radial-gradient(700px 420px at 4% 6%, var(--accent-soft), transparent 65%); background-repeat: no-repeat; }
+.site-header { background: var(--header-bg); }
+
+/* Accent surfaces use a gentle gradient */
+.button--accent, .nav-booking, .chip--on, .gallery-zoom, .hero-now-play, .skip-link { background: var(--accent-grad); color: var(--on-accent); }
+.button--accent:hover, .nav-booking:hover { background: var(--accent-grad); filter: brightness(1.08); }
+.button--outline:hover, .button--soft:hover, .button--light:hover { border-color: var(--accent); background: var(--accent-soft); }
+.chip--on, .chip--on:hover { background: var(--accent-grad); border-color: transparent; color: var(--on-accent); }
+.chip:hover { border-color: var(--accent); }
+.nav-link.active::after { background: var(--accent-grad); }
+.eyebrow, .text-link { color: var(--accent-text); }
+.status-dot { background: var(--accent); }
+.caption-line { background: var(--accent); }
+::selection { background: var(--accent); color: var(--on-accent); }
+:focus-visible { outline-color: var(--accent); }
+
+/* Cut-out stage and hero glow tinted to match */
+.cutout-stage--red, .cutout-stage--yellow, .cutout-stage--green { --tint: rgba(139, 123, 255, .26); }
+:root[data-theme='light'] .cutout-stage--red, :root[data-theme='light'] .cutout-stage--yellow, :root[data-theme='light'] .cutout-stage--green { --tint: rgba(91, 69, 240, .16); }
+.hero-glow { background: radial-gradient(circle at 50% 38%, var(--accent-soft), transparent 70%), var(--surface-2); border-color: var(--line); }
+.hero-photo { border-color: var(--line-strong); }
+
+/* Photo tags and cards: cooler, cleaner */
+.gallery-tag { color: #fff; background: rgba(8, 9, 14, .7); }
+.glance-card, .release-art, .listen-card, .contact-option, .show-row, .next-show, .shows-empty, .enquiry, .platform-panel, .press-bio, .press-contact { background: var(--surface); border-color: var(--line); }
+.booking-strip { background: linear-gradient(180deg, var(--surface), var(--surface-2)); }
+.field input:focus, .field textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
