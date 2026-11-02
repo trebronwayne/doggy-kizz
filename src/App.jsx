@@ -242,7 +242,6 @@ function HomePage() {
             <div className="hero-platforms"><span>FOLLOW</span><SocialLinks compact withWhatsApp /></div>
           </div>
           <div className={`home-hero-visual ${cutout ? '' : 'home-hero-visual--photo'}`} style={cutout ? { '--hero-img': `url(${cutout.src})` } : undefined}>
-            <div className="home-hero-ring" aria-hidden="true" />
             {cutout
               ? <img className="home-hero-cutout" src={cutout.src} alt={`${content.artistName} portrait`} fetchPriority="high" decoding="async" />
               : <Photo src={content.images.hero} alt={`${content.artistName} portrait`} className="home-hero-photo" fallback="DK" />}

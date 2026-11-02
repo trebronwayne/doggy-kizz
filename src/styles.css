@@ -1777,3 +1777,6 @@ body { background-color: var(--bg); background-image: radial-gradient(900px 520p
   .home-hero-visual { height: 420px; }
   .home-hero-cutout { right: -14%; }
 }
+
+/* v16 — no ring behind the home portrait */
+.home-hero-ring { display: none; }
